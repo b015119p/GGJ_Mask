@@ -13,11 +13,15 @@ public class PlayerBehaviour : MonoBehaviour
 
     //Input system itself
     InputSystem_Actions m_GameControls;
-
+    //Animator reference, needed to change animation states
+    private Animator m_animator;
     //Player's rigidbody component
     private Rigidbody2D m_rigidbody;
     //Player's Circlebody component
-    private CircleCollider2D m_collider;
+    private CapsuleCollider2D m_collider;
+    //Used to flip the sprite
+    private SpriteRenderer m_spriteRenderer;
+
     //Layer used for detecting collision
     public LayerMask wallLayer;
 
@@ -26,15 +30,14 @@ public class PlayerBehaviour : MonoBehaviour
     //Direction we want the player to move in. This variable should only be on the x axis
     private Vector2 m_playerDirection;
     //Speed of the player. Kinda simple
-    [SerializeField] private float m_playerSpeed = 200f;
+    [SerializeField] private float m_playerSpeed = 5f;
     //Scale of the thing mario does. yahoo!
     [SerializeField] private float m_jumpPower = 5f;
     //Used to handle which direction the player is moving in. Flip (true) = right, Flop (false) = left.
     private bool m_flipFlop = true;
     //Used to handle if the player can double jump
     public bool m_canDJ = false;
-    //Effectively a state to handle the cooldown for the DJ
-    private bool m_djReady = false;
+    private bool m_djReady;
     //Used to handle if the player can dash.
     private bool m_dashReady = true;
     //Used to handle if the player is actively dashing
@@ -134,7 +137,9 @@ public class PlayerBehaviour : MonoBehaviour
     private void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody2D>();
-        m_collider = GetComponent<CircleCollider2D>();
+        m_collider = GetComponent<CapsuleCollider2D>();
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_animator = GetComponent<Animator>();
 
         m_GameControls = new InputSystem_Actions();
 
@@ -167,10 +172,17 @@ public class PlayerBehaviour : MonoBehaviour
         if (isGrounded())
         {
             m_dashReady = true;
+
             if (m_canDJ)
             {
                 m_djReady = true;
             }
+
+            m_animator.SetBool("Grounded", true);
+        }
+        else
+        {
+            m_animator.SetBool("Grounded", false);
         }
     }
 
@@ -179,10 +191,12 @@ public class PlayerBehaviour : MonoBehaviour
         if (m_flipFlop)
         {
             m_playerDirection = Vector2.left;
+            m_spriteRenderer.flipX = true;
         }
         else
         {
             m_playerDirection = Vector2.right;
+            m_spriteRenderer.flipX = false;
         }
         m_flipFlop = !m_flipFlop;
     }
@@ -203,6 +217,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (ctx.performed)
             {
                 m_rigidbody.linearVelocity = new Vector2(m_rigidbody.linearVelocity.x, m_jumpPower);
+                m_animator.SetTrigger("Jump");
             }
 
         }
@@ -212,6 +227,7 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 m_djReady = false;
                 m_rigidbody.linearVelocity = new Vector2(m_rigidbody.linearVelocity.x, m_jumpPower);
+                m_animator.SetTrigger("Jump");
             }
         }
 
@@ -245,6 +261,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private IEnumerator Dash()
     {
+        m_animator.SetTrigger("Dash");
         m_Dashing = true;
         m_dashReady = false;
         float ogGravity = m_rigidbody.gravityScale;
