@@ -32,7 +32,9 @@ public class PlayerBehaviour : MonoBehaviour
     //Used to handle which direction the player is moving in. Flip (true) = right, Flop (false) = left.
     private bool m_flipFlop = true;
     //Used to handle if the player can double jump
-    private bool m_djReady;
+    public bool m_canDJ = false;
+    //Effectively a state to handle the cooldown for the DJ
+    private bool m_djReady = false;
     //Used to handle if the player can dash.
     private bool m_dashReady = true;
     //Used to handle if the player is actively dashing
@@ -165,7 +167,10 @@ public class PlayerBehaviour : MonoBehaviour
         if (isGrounded())
         {
             m_dashReady = true;
-            m_djReady = true;
+            if (m_canDJ)
+            {
+                m_djReady = true;
+            }
         }
     }
 
