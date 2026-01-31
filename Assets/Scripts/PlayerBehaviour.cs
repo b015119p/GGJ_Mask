@@ -65,6 +65,11 @@ public class PlayerBehaviour : MonoBehaviour
         m_currentState = (MovementState)newState;
     }
 
+    public void DisableMv(int state)
+    {
+        DisableMType(m_currentState);
+    }
+
     private void EnableMType(MovementState State)
     {
         switch (State)
@@ -285,5 +290,10 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(m_groundCheckPos.position, m_groundCheckSize);
+    }
+
+    public int getState()
+    {
+        return (int)m_currentState;
     }
 }
