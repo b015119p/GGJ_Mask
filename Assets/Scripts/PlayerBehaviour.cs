@@ -43,6 +43,9 @@ public class PlayerBehaviour : MonoBehaviour
     //Used to handle if the player is actively dashing
     private bool m_Dashing = false;
 
+    [Header("Soundz")]
+    public AudioClip m_SFXDash;
+    private AudioSource m_AudioSource;
 
     [Header("Ground check")]
     //Point to check for the ground.
@@ -145,6 +148,7 @@ public class PlayerBehaviour : MonoBehaviour
         m_collider = GetComponent<CapsuleCollider2D>();
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_animator = GetComponent<Animator>();
+        m_AudioSource = GetComponent<AudioSource>();
 
         m_GameControls = new InputSystem_Actions();
 
@@ -267,6 +271,7 @@ public class PlayerBehaviour : MonoBehaviour
     private IEnumerator Dash()
     {
         m_animator.SetTrigger("Dash");
+        m_AudioSource.PlayOneShot(m_SFXDash);
         m_Dashing = true;
         m_dashReady = false;
         float ogGravity = m_rigidbody.gravityScale;
