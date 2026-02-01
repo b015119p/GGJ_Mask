@@ -9,9 +9,12 @@ public class MovingObstacle : MonoBehaviour
 
     [SerializeField] private Transform m_target;
     private Rigidbody2D m_rigidbody;
+    private SpriteRenderer m_spriteRenderer;
+    private bool m_flipFlop = false;
 
     private void Awake()
     {
+        m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -34,6 +37,11 @@ public class MovingObstacle : MonoBehaviour
             //Debug.Log("Whomp");
             updateTarget();
         }
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            collision.gameObject.GetComponent<PlayerBehaviour>().KILLPLAYER();
+        }
     }
 
     void updateTarget()
@@ -41,5 +49,15 @@ public class MovingObstacle : MonoBehaviour
         m_index++;
         m_index %= m_waypoints.Length;
         m_target = m_waypoints[m_index];
+
+        if (m_flipFlop)
+        {
+            m_spriteRenderer.flipX = true;
+        }
+        else
+        {
+            m_spriteRenderer.flipX = false;
+        }
+        m_flipFlop = !m_flipFlop;
     }
 }
