@@ -13,6 +13,9 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private bool m_pausable;
     private bool m_moveText;
     InputSystem_Actions m_GameControls;
+    [SerializeField] private GameObject m_deathButton;
+    [SerializeField] private GameObject m_Panel;
+
 
     private void Awake()
     {
@@ -102,5 +105,21 @@ public class MenuManager : MonoBehaviour
                 m_scrollingText.transform.localPosition = new Vector3(1560, 152, 0);
             }
         }
+    }
+
+    public void ShowDeathButton()
+    {
+        m_deathButton.SetActive(true);
+    }
+
+    public void deathButtonPressed()
+    {
+        m_deathButton.SetActive(false);
+        //m_animator.SetTrigger("Fade");
+    }
+
+    public void fadelol()
+    {
+        m_Panel.GetComponent<Animator>().SetTrigger("Fade");
     }
 }

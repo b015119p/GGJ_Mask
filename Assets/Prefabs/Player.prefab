@@ -112,7 +112,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -7564245215697366105, guid: 07c16927b7b65d145aeb268a4b9e05cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_jumpPower: 7.5
   m_canDJ: 0
   m_SFXDash: {fileID: 8300000, guid: 9d5bfa15edaae6641a02a64992c4f802, type: 3}
-  m_AudioSource: {fileID: 0}
   m_groundCheckPos: {fileID: 8968350295382893631}
   m_groundCheckSize: {x: 0.5, y: 0.05}
 --- !u!50 &8883804021818733963

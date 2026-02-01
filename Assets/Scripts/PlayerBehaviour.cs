@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -24,6 +25,10 @@ public class PlayerBehaviour : MonoBehaviour
 
     //Layer used for detecting collision
     public LayerMask wallLayer;
+
+    public UnityEvent<PlayerBehaviour> Death;
+
+    public bool m_dead = false;
 
     [Header("Movement parameters")]
     [SerializeField] private MovementState m_currentState = MovementState.Basic;
@@ -164,7 +169,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per fixed update, think the default is 40
     void FixedUpdate()
     {
-        if (m_Dashing)
+        if (m_Dashing || m_dead)
         {
             return;
         }
@@ -300,5 +305,11 @@ public class PlayerBehaviour : MonoBehaviour
     public int getState()
     {
         return (int)m_currentState;
+    }
+
+    public void KILLPLAYER()
+    {
+        m_dead = true;
+        Death?.Invoke(this);
     }
 }

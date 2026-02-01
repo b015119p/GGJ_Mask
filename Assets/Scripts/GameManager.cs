@@ -8,10 +8,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject m_PlayerPrefab;
     private GameObject m_slimbo;
     [SerializeField] private GameObject m_CheckpointParent;
+    [SerializeField] private GameObject m_spawnerThingyParnt;
     [SerializeField] private GameObject m_End;
     [SerializeField] private CinemachineCamera m_Camera;
     public Transform m_groundCheckPos;
     [SerializeField] Vector2 m_SpawnPosition;
+    [SerializeField] private MenuManager m_Menuss;
+
 
     private int m_playerState = 0;
     private bool m_slimboCanDoubleJump = false;
@@ -20,7 +23,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_SpawnPosition = m_groundCheckPos.position;
-
 
         for (int i = 0; i < m_CheckpointParent.transform.childCount; i++)
         {
@@ -35,8 +37,8 @@ public class GameManager : MonoBehaviour
 
     private void OnWin(WinBounds Win)
     {
+        m_slimbo.GetComponent<PlayerBehaviour>().DisableMv(m_playerState);
         Debug.Log("WIN???");
-        SpawnPlayer();
     }
 
     private void onCheckpoint(CheckPointBounds cuh)
@@ -48,8 +50,19 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void PlayerDeath(PlayerBehaviour buh)
+    {
+        m_Menuss.fadelol();
+        SpawnPlayer();
+    }
+
     public void SpawnPlayer()
     {
+        for (int i = 0; i < m_spawnerThingyParnt.transform.childCount; i++)
+        {
+            m_spawnerThingyParnt.transform.GetChild(i).GetComponent<thingthatrespawnthing>().spawnThings();
+        }
+
         if (m_slimbo != null)
         {
             m_slimbo.GetComponent<PlayerBehaviour>().DisableMv(m_playerState);
@@ -63,5 +76,7 @@ public class GameManager : MonoBehaviour
 
         m_Camera.GetComponent<CinemachineCamera>().LookAt = m_slimbo.transform;
         m_Camera.GetComponent<CinemachineCamera>().Follow = m_slimbo.transform;
+
+        m_slimbo.GetComponent<PlayerBehaviour>().Death.AddListener(PlayerDeath);
     }
 }
