@@ -42,7 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
     private bool m_flipFlop = true;
     //Used to handle if the player can double jump
     public bool m_canDJ = false;
-    private bool m_djReady;
+    public bool m_djReady;
     //Used to handle if the player can dash.
     private bool m_dashReady = true;
     //Used to handle if the player is actively dashing

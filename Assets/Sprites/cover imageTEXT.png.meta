@@ -1,22 +1,10 @@
 fileFormatVersion: 2
-guid: 818ce690dc0b54b438aa0693afe9858d
+guid: 61928e84944cfee47b27e62cb06d91f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8056444638467035469
-    second: rabbitholes_0
-  - first:
-      213: -5505625259962038881
-    second: rabbitholes_1
-  - first:
-      213: 6218673805980461829
-    second: rabbitholes_2
-  - first:
-      213: -5403692927770470515
-    second: rabbitholes_3
-  - first:
-      213: 3041466806599867076
-    second: rabbitholes_4
+      213: 595205494274240728
+    second: cover imageTEXT_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -58,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -138,111 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: rabbitholes_0
+      name: cover imageTEXT_0
       rect:
         serializedVersion: 2
-        x: 15
-        y: 63
-        width: 146
-        height: 50
+        x: 28
+        y: 117
+        width: 157
+        height: 72
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d419d6cb6bd3ecf60800000000000000
-      internalID: 8056444638467035469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rabbitholes_1
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 15
-        width: 47
-        height: 50
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 1}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f958b810ff61893b0800000000000000
-      internalID: -5505625259962038881
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rabbitholes_2
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 15
-        width: 46
-        height: 49
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 50bed7be0ea2d4650800000000000000
-      internalID: 6218673805980461829
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rabbitholes_3
-      rect:
-        serializedVersion: 2
-        x: 162
-        y: 65
-        width: 30
-        height: 7
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: d8753f489e93205b0800000000000000
-      internalID: -5403692927770470515
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: rabbitholes_4
-      rect:
-        serializedVersion: 2
-        x: 193
-        y: 64
-        width: 32
-        height: 29
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4cad68b32f5753a20800000000000000
-      internalID: 3041466806599867076
+      spriteID: 8d0b3965e38924800800000000000000
+      internalID: 595205494274240728
       vertices: []
       indices: 
       edges: []
@@ -251,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 59ca6012ea969194da3c3580b9276770
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -261,11 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      rabbitholes_0: 8056444638467035469
-      rabbitholes_1: -5505625259962038881
-      rabbitholes_2: 6218673805980461829
-      rabbitholes_3: -5403692927770470515
-      rabbitholes_4: 3041466806599867076
+      cover imageTEXT_0: 595205494274240728
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
