@@ -1,19 +1,24 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     //This is the panel which should be active at first
     [SerializeField] private GameObject m_activePanel;
     [SerializeField] private GameObject m_pausePanel;
+    [SerializeField] private TextMeshProUGUI m_scrollingText;
     [SerializeField] private bool m_pausable;
+    private bool m_moveText;
     InputSystem_Actions m_GameControls;
 
     private void Awake()
     {
         m_GameControls = new InputSystem_Actions();
         m_GameControls.UI.Enable();
+        m_moveText = false;
     }
 
     private void OnEnable()
@@ -76,6 +81,26 @@ public class MenuManager : MonoBehaviour
         else
         {
             m_pausable = false;
+        }
+    }
+
+    public void TextScroll(string m_text)
+    {
+        m_scrollingText.text = m_text;
+        m_moveText = true;
+        m_scrollingText.transform.localPosition = new Vector3(1560, 152, 0);
+    }
+
+    private void Update()
+    {
+        if (m_moveText)
+        {
+            m_scrollingText.transform.localPosition -= new Vector3(200 * Time.deltaTime, 0, 0);
+            if (m_scrollingText.transform.localPosition[0] <= -1550)
+            {
+                m_moveText = false;
+                m_scrollingText.transform.localPosition = new Vector3(1560, 152, 0);
+            }
         }
     }
 }
