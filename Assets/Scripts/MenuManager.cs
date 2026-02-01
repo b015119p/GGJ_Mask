@@ -16,12 +16,15 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject m_deathButton;
     [SerializeField] private GameObject m_Panel;
 
+    private AudioSource m_AudioSource;
 
     private void Awake()
     {
         m_GameControls = new InputSystem_Actions();
         m_GameControls.UI.Enable();
         m_moveText = false;
+        m_AudioSource = GetComponent<AudioSource>();
+
     }
 
     private void OnEnable()
@@ -110,12 +113,14 @@ public class MenuManager : MonoBehaviour
     public void ShowDeathButton()
     {
         m_deathButton.SetActive(true);
+        m_AudioSource.Play();
     }
 
     public void deathButtonPressed()
     {
         m_deathButton.SetActive(false);
-        //m_animator.SetTrigger("Fade");
+        fadelol();
+        m_AudioSource.Stop();
     }
 
     public void fadelol()

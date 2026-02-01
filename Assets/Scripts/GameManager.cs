@@ -15,13 +15,23 @@ public class GameManager : MonoBehaviour
     [SerializeField] Vector2 m_SpawnPosition;
     [SerializeField] private MenuManager m_Menuss;
 
+    private AudioSource m_AudioSource;
+    public AudioClip m_SFXDash;
 
     private int m_playerState = 0;
     private bool m_slimboCanDoubleJump = false;
 
+    private void Awake()
+    {
+        m_AudioSource = GetComponent<AudioSource>();
+    }
+
 
     private void Start()
     {
+        m_AudioSource.Play();
+
+
         m_SpawnPosition = m_groundCheckPos.position;
 
         for (int i = 0; i < m_CheckpointParent.transform.childCount; i++)
@@ -38,6 +48,8 @@ public class GameManager : MonoBehaviour
     private void OnWin(WinBounds Win)
     {
         m_slimbo.GetComponent<PlayerBehaviour>().DisableMv(m_playerState);
+        m_AudioSource.Stop();
+        m_AudioSource.PlayOneShot(m_SFXDash);
         Debug.Log("WIN???");
     }
 
@@ -52,8 +64,10 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDeath(PlayerBehaviour buh)
     {
-        m_Menuss.fadelol();
-        SpawnPlayer();
+        m_Menuss.ChangePausability(false);
+        m_AudioSource.Pause();
+        m_Menuss.ShowDeathButton();
+        //SpawnPlayer();
     }
 
     public void SpawnPlayer()
@@ -79,4 +93,9 @@ public class GameManager : MonoBehaviour
 
         m_slimbo.GetComponent<PlayerBehaviour>().Death.AddListener(PlayerDeath);
     }
+
+    //public void ResumeMusic()
+    //{
+    //    m_AudioSource.Play();
+    //}
 }

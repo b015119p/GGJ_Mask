@@ -6,8 +6,13 @@ public class MovingThing : MonoBehaviour
 [SerializeField] private int m_index = 0;
 [SerializeField] private float m_speed = 5;
 
-[SerializeField] private Transform m_target;
-private Rigidbody2D m_rigidbody;
+[SerializeField] private Transform m_targetA;
+    [SerializeField] private Transform m_targetB;
+    [SerializeField] private Transform m_target;
+
+    private bool ough = false;
+
+    private Rigidbody2D m_rigidbody;
 
 private void Awake()
 {
@@ -17,13 +22,19 @@ private void Awake()
 // Start is called once before the first execution of Update after the MonoBehaviour is created
 void Start()
 {
-    m_target = m_waypoints[m_index];
+    m_targetA = m_waypoints[0];
+        m_targetB = m_waypoints[1];
+        updateTarget();
 }
 
 // Update is called once per frame
 void Update()
 {
     transform.position = Vector2.MoveTowards(transform.position, m_target.position, m_speed * Time.deltaTime);
+        if (transform.position == m_target.position)
+        {
+            updateTarget();
+        }
 }
 
 private void OnTriggerEnter2D(Collider2D collision)
@@ -37,10 +48,17 @@ private void OnTriggerEnter2D(Collider2D collision)
 
 void updateTarget()
 {
-    m_index++;
-    m_index %= m_waypoints.Length;
-    m_target = m_waypoints[m_index];
-}
+        if (ough)
+        {
+            m_target = m_targetB.transform;
+        }
+        else
+        {
+            m_target = m_targetA.transform;
+
+        }
+        ough = !ough;
+    }
 
 
 }

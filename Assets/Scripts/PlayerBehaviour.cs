@@ -50,6 +50,9 @@ public class PlayerBehaviour : MonoBehaviour
 
     [Header("Soundz")]
     public AudioClip m_SFXDash;
+    public AudioClip m_WallSplat;
+    public AudioClip m_SFXLand;
+    public AudioClip bwomp;
     private AudioSource m_AudioSource;
 
     [Header("Ground check")]
@@ -179,6 +182,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Behaviour to change direction, effectively activates when the player hits a wall.
         if (Physics2D.Raycast(transform.position, m_playerDirection, m_collider.bounds.extents.x + 0.1f, wallLayer))
         {
+            m_AudioSource.PlayOneShot(m_WallSplat);
             ChangeDirection();
         }
 
@@ -311,5 +315,17 @@ public class PlayerBehaviour : MonoBehaviour
     {
         m_dead = true;
         Death?.Invoke(this);
+    }
+
+    public void landSound()
+    {
+        m_AudioSource.PlayOneShot(m_SFXLand);
+
+    }
+
+    public void PlayTheSoundFromTheGame()
+    {
+        m_AudioSource.PlayOneShot(bwomp);
+
     }
 }
